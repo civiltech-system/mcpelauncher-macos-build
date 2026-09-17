@@ -1,0 +1,32 @@
+name: Build Minecraft Bedrock Launcher for macOS
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+
+jobs:
+  build:
+    uses: minecraft-linux/macos-builder/.github/workflows/main.yml@main
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    with:
+      # mcpelauncher-manifest v1.8.1 release commit
+      mcpelauncher-ref: "91220f0"
+
+      # Qt 5系macOS UI manifest
+      mcpelauncher-ui-ref: "ng"
+
+      # Microsoft認証コンポーネント
+      msa-ref: "master"
+
+      # Apple Silicon用ゲームクライアントを同梱
+      build-m1: true
+
+      # GitHub Releaseには公開せずArtifactだけ作る
+      publish: false
